@@ -1,64 +1,64 @@
 // Copyright 2022 UNN-IASR
-#include "Automata.h"
 #include <gtest/gtest.h>
+#include "Automata.h"
 
 class ATest : public ::testing::Test {
  protected:
-    Automata automata;
+    Automata vendingMachine;
 
     void SetUp() override {
-        automata.on();
+        vendingMachine.on();
     }
 };
 
 TEST_F(ATest, 1) {
-    Automata newAutomata;
-    EXPECT_EQ(newAutomata.getState(), STATES::OFF);
+    Automata newVendingMachine;
+    EXPECT_EQ(newVendingMachine.getState(), STATES::OFF);
 }
 
 TEST_F(ATest, 2) {
-    EXPECT_EQ(automata.getState(), STATES::WAIT);
+    EXPECT_EQ(vendingMachine.getState(), STATES::WAIT);
 }
 
 TEST_F(ATest, 3) {
-    automata.coin(50);
-    EXPECT_EQ(automata.getState(), STATES::ACCEPT);
+    vendingMachine.coin(50);
+    EXPECT_EQ(vendingMachine.getState(), STATES::ACCEPT);
 }
 
 TEST_F(ATest, 4) {
-    EXPECT_NO_THROW(automata.getMenu());
+    EXPECT_NO_THROW(vendingMachine.getMenu());
 }
 
 TEST_F(ATest, 5) {
-    automata.coin(100);
-    automata.choice(2);
-    EXPECT_EQ(automata.getState(), STATES::WAIT);
+    vendingMachine.coin(100);
+    vendingMachine.choice(2);
+    EXPECT_EQ(vendingMachine.getState(), STATES::WAIT);
 }
 
 TEST_F(ATest, 6) {
-    automata.coin(10);
-    EXPECT_FALSE(automata.check(1));
+    vendingMachine.coin(10);
+    EXPECT_FALSE(vendingMachine.check(1));
 }
 
 TEST_F(ATest, 7) {
-    automata.coin(50);
-    automata.cancel();
+    vendingMachine.coin(50);
+    vendingMachine.cancel();
     EXPECT_EQ(automata.getState(), STATES::WAIT);
 }
 
 TEST_F(ATest, 8) {
-    automata.coin(100);
-    automata.choice(1);
-    EXPECT_EQ(automata.getState(), STATES::WAIT);
+    vendingMachine.coin(100);
+    vendingMachine.choice(1);
+    EXPECT_EQ(vendingMachine.getState(), STATES::WAIT);
 }
 
 TEST_F(ATest, 9) {
-    automata.coin(100);
-    automata.choice(1);
-    EXPECT_EQ(automata.getState(), STATES::WAIT);
+    vendingMachine.coin(100);
+    vendingMachine.choice(1);
+    EXPECT_EQ(vendingMachine.getState(), STATES::WAIT);
 }
 
 TEST_F(ATest, 10) {
-    automata.choice(1);
-    EXPECT_NE(automata.getState(), STATES::COOK);
+    vendingMachine.choice(1);
+    EXPECT_NE(vendingMachine.getState(), STATES::COOK);
 }
