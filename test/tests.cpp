@@ -2,8 +2,8 @@
 #include "Automata.h"
 #include <gtest/gtest.h>
 
-class ATest : public ::testing::Test {
-protected:
+class AutomataTest : public ::testing::Test {
+ protected:
     Automata automata;
 
     void SetUp() override {
@@ -11,54 +11,54 @@ protected:
     }
 };
 
-TEST(ATest, 1) {
+TEST_F(AutomataTest, IsInitiallyOff) {
     Automata newAutomata;
     EXPECT_EQ(newAutomata.getState(), STATES::OFF);
 }
 
-TEST(ATest, 2) {
+TEST_F(AutomataTest, TurnsOn) {
     EXPECT_EQ(automata.getState(), STATES::WAIT);
 }
 
-TEST(ATest, 3) {
+TEST_F(AutomataTest, AcceptsCoins) {
     automata.coin(100);
     EXPECT_EQ(automata.getState(), STATES::ACCEPT);
 }
 
-TEST(ATest, 4) {
+TEST_F(AutomataTest, CanReadMenu) {
     EXPECT_NO_THROW(automata.getMenu());
 }
 
-TEST(ATest, 5) {
+TEST_F(AutomataTest, MakesSelection) {
     automata.coin(200);
     automata.choice(2);
     EXPECT_EQ(automata.getState(), STATES::WAIT);
 }
 
-TEST(ATest, 6) {
+TEST_F(AutomataTest, ChecksSufficientFunds) {
     automata.coin(20);
     EXPECT_FALSE(automata.check(1));
 }
 
-TEST(ATest, 7) {
+TEST_F(AutomataTest, CancelsTransaction) {
     automata.coin(100);
     automata.cancel();
     EXPECT_EQ(automata.getState(), STATES::WAIT);
 }
 
-TEST(ATest, 8) {
+TEST_F(AutomataTest, CooksDrink) {
     automata.coin(200);
     automata.choice(1);
     EXPECT_EQ(automata.getState(), STATES::WAIT);
 }
 
-TEST(ATest, 9) {
+TEST_F(AutomataTest, FinishesTransaction) {
     automata.coin(200);
     automata.choice(1);
     EXPECT_EQ(automata.getState(), STATES::WAIT);
 }
 
-TEST(ATest, 10) {
+TEST_F(AutomataTest, DoesNotCookWithoutFunds) {
     automata.choice(1);
     EXPECT_NE(automata.getState(), STATES::COOK);
 }
