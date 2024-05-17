@@ -42,7 +42,7 @@ STATES Automata::getState() {
     return state;
 }
 
-void Automata::choice(unsigned int Num) {
+void Automata::choice(int Num) {
     if (state == STATES::ACCEPT && Num <= menu.size()) {
         state = STATES::CHECK;
         if (check(Num - 1)) {
@@ -55,7 +55,7 @@ void Automata::choice(unsigned int Num) {
     }
 }
 
-bool Automata::check(unsigned int Num) {
+bool Automata::check(int Num) {
     return cash >= price[Num];
 }
 
@@ -67,10 +67,10 @@ void Automata::cancel() {
     }
 }
 
-void Automata::cook(unsigned int drinkNumber) {
+void Automata::cook(int Num) {
     if (state == STATES::CHECK) {
         std::cout << "Cooking... " << menu[Num] << std::endl;
-        cash -= price[drinkNumber];
+        cash -= price[Num];
         state = STATES::COOK;
         finish();
     }
