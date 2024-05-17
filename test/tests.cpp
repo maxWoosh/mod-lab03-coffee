@@ -43,7 +43,7 @@ TEST_F(ATest, 6) {
 TEST_F(ATest, 7) {
     vendingMachine.coin(50);
     vendingMachine.cancel();
-    EXPECT_EQ(automata.getState(), STATES::WAIT);
+    EXPECT_EQ(vendingMachine.getState(), STATES::WAIT);
 }
 
 TEST_F(ATest, 8) {
