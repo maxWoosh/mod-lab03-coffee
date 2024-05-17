@@ -79,4 +79,3 @@ void Automata::finish() {
     std::cout << "Take your drink pls!" << std::endl;
     state = STATES::WAIT;
 }
-        
